@@ -10,7 +10,14 @@ import connectDB from "./db/index.js";
 
 //Second Approach: calling a function by importing (BETTER APPROACH)
 connectDB()
-
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Your server is running on :${process.env.PORT}`)
+    })
+})
+.catch(() => {
+    console.log("MONGO DB connectiona error !!!")
+})
 
 
 
