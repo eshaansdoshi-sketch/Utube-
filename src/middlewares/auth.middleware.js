@@ -1,6 +1,6 @@
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
-import { User } from "../models/User.model";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { User } from "../models/User.model.js";
 import jwt from "jsonwebtoken";
 
 // This middleware helps us to securely confirm whether the user is even logged in
@@ -13,7 +13,6 @@ export const verifyJWT = asyncHandler(async(req, res, next) => {
      if (!token) {
          throw new ApiError(401, "Unauthorized request")
      }
- 
      const decodeToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
  
      const user = await User.findById(decodeToken?._id).select("-password -refreshToken")
